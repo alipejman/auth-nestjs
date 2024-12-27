@@ -2,11 +2,16 @@ import { registerAs } from "@nestjs/config"
 
 export enum ConfigKeys {
     App = "App",
-    Db = "Db"
+    Db = "Db",
+    jwt= "jwt"
 }
 
 const AppConfig = registerAs(ConfigKeys.App, () => ({
     port: 3000
+}))
+const jwtConfig = registerAs(ConfigKeys.jwt, () => ({
+    accessTokenSecret: "039d291958f0380e499852424f8f9da82fb373e8",
+    refreshTokenSecret: "dce8b0bb82bc8d04a2c91b5705da1f3449fce2df",
 }))
 const DbConfig = registerAs(ConfigKeys.Db, () => ({
         type: 'postgres', // نوع پایگاه داده
@@ -19,4 +24,4 @@ const DbConfig = registerAs(ConfigKeys.Db, () => ({
         synchronize: true, // برای همگام‌سازی مدل‌ها با پایگاه داده (فقط در محیط توسعه)
 }))
 
-export const configurations = [AppConfig, DbConfig]
+export const configurations = [AppConfig, DbConfig, jwtConfig]
